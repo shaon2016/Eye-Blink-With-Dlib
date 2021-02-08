@@ -18,11 +18,11 @@ package com.tzutalin.dlibtest;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.UiThread;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -33,6 +33,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.UiThread;
 
 import java.lang.ref.WeakReference;
 
@@ -127,13 +129,27 @@ public class FloatingCameraWindow {
     }
 
     private WindowManager.LayoutParams initWindowParameter() {
-        mWindowParam = new WindowManager.LayoutParams();
+        int LAYOUT_FLAG;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+        }
 
-        mWindowParam.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        mWindowParam.format = 1;
-        mWindowParam.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        mWindowParam.flags = mWindowParam.flags | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH;
-        mWindowParam.flags = mWindowParam.flags | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+        mWindowParam =  new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                LAYOUT_FLAG,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                        | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                        | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                        | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
+
+//        mWindowParam.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+//        mWindowParam.format = 1;
+
 
         mWindowParam.alpha = 1.0f;
 
@@ -217,7 +233,7 @@ public class FloatingCameraWindow {
             mFPSText.setVisibility(View.GONE);
             mInfoText.setVisibility(View.GONE);
 
-            int colorMaxWidth = (int) (mWindowWidth* window.mScaleWidthRatio);
+            int colorMaxWidth = (int) (mWindowWidth * window.mScaleWidthRatio);
             int colorMaxHeight = (int) (mWindowHeight * window.mScaleHeightRatio);
 
             mColorView.getLayoutParams().width = colorMaxWidth;

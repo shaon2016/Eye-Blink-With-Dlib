@@ -16,9 +16,10 @@
 
 package com.tzutalin.dlibtest;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.BufferedWriter;
 import java.io.File;

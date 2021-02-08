@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/detectionWithDlib.iml" filepath="$PROJECT_DIR$/detectionWithDlib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dlib/dlib.iml" filepath="$PROJECT_DIR$/dlib/dlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/detectionWithDlib.iml" filepath="$PROJECT_DIR$/.idea/detectionWithDlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/detectionWithDlib.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/detectionWithDlib.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dlib/detectionWithDlib.dlib.iml" filepath="$PROJECT_DIR$/.idea/modules/dlib/detectionWithDlib.dlib.iml" />
     </modules>
   </component>
 </project>

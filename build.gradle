@@ -1,20 +1,27 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = "1.4.21"
     repositories {
         mavenCentral()
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:4.1.2"
+
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         classpath "com.github.dcendents:android-maven-gradle-plugin:1.4.1"
+
     }
 }
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -30,6 +37,5 @@ ext {
     releaseVersionCode = 1
     releaseVersionName = '1.0.4'
 
-    androidBuildToolsVersion = '25.0.2'
-    androidSupportSdkVersion = '25.2.0'
+
 }

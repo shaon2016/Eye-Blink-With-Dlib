@@ -18,7 +18,8 @@ package com.tzutalin.dlibtest;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
-import android.support.annotation.Keep;
+
+import androidx.annotation.Keep;
 
 import java.io.File;
 import java.io.FileOutputStream;

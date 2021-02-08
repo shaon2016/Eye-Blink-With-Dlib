@@ -23,7 +23,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.media.Image;
 import android.media.Image.Plane;
@@ -34,8 +33,6 @@ import android.os.Trace;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-
-import junit.framework.Assert;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -88,7 +85,7 @@ public class OnGetImageListener implements OnImageAvailableListener {
 
     public void deInitialize() {
         synchronized (OnGetImageListener.this) {
-            if (processFrameQueue != null){
+            if (processFrameQueue != null) {
                 processFrameQueue.release();
             }
         }
@@ -111,7 +108,8 @@ public class OnGetImageListener implements OnImageAvailableListener {
             mScreenRotation = 0;
         }
 
-        Assert.assertEquals(dst.getWidth(), dst.getHeight());
+        assert dst.getWidth() == dst.getHeight();
+//        Assert.assertEquals(dst.getWidth(), dst.getHeight());
         final float minDim = Math.min(src.getWidth(), src.getHeight());
 
         final Matrix matrix = new Matrix();
@@ -135,7 +133,7 @@ public class OnGetImageListener implements OnImageAvailableListener {
         canvas.drawBitmap(src, matrix, null);
     }
 
-    public Bitmap imageSideInversion(Bitmap src){
+    public Bitmap imageSideInversion(Bitmap src) {
         Matrix sideInversion = new Matrix();
         sideInversion.setScale(-1, 1);
         Bitmap inversedImage = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), sideInversion, false);
@@ -207,7 +205,7 @@ public class OnGetImageListener implements OnImageAvailableListener {
         drawResizedBitmap(mRGBframeBitmap, mCroppedBitmap);
 
         mInversedBipmap = imageSideInversion(mCroppedBitmap);
-        mResizedBitmap = Bitmap.createScaledBitmap(mInversedBipmap, (int)(INPUT_SIZE/r), (int)(INPUT_SIZE/r), true);
+        mResizedBitmap = Bitmap.createScaledBitmap(mInversedBipmap, (int) (INPUT_SIZE / r), (int) (INPUT_SIZE / r), true);
 
         try {
             frameQueueForDisplay.put(mInversedBipmap);
